@@ -22,31 +22,46 @@ Inventories
             </button>
           </div>
           <div class="modal-body">
+
             <form>
+              <!-- name -->
               <div class="form-group">
                 <label for="exampleInputEmail1">Name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input required type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
               </div>
+
+              <!-- type -->
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Type</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>product</option>
-                  <option>service</option>
+                <select  name="type" class="form-control" id="exampleFormControlSelect1" required>
+                  <option></option>
+                  <option value="product">product</option>
+                  <option value="service">service</option>
                 </select>
               </div>
+
+              <!-- bp -->
               <div class="form-group">
                 <label for="exampleInputEmail1">Buying Price</label>
-                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="0.0">
+                <input required name="bp" min="1" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
               </div>
+
+              <!-- sp -->
               <div class="form-group">
                 <label for="exampleInputEmail1">Selling Price</label>
-                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="0.0">
+                <input required  name="sp" min="1" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
               </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-success">Save</button>
+              </div>
+
             </form>
+
+            
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Add</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
@@ -79,7 +94,7 @@ Inventories
           <td>1000</td>
           <td>20</td>
           <td>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStock">Add Stock</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStock"><i class="fa fa-plus" aria-hidden="true"></i>Add Stock</button>
 
                 <!--Stock Modal -->
                 <div class="modal fade" id="addStock" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -108,10 +123,12 @@ Inventories
                 </div>
 
 
-            <button type="button" class="btn btn-secondary">Add Sale</button>
+            <button type="button" class="btn btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i>Add Sale</button>
             <button type="button" class="btn btn-success">View Sale</button>
-            <button type="button" class="btn btn-warning">Edit Inventory</button>
-            <button type="button" class="btn btn-danger">Delete Inventory</button>
+            <button type="button" class="btn btn-secondary">
+              edit
+            </button>
+            <button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
           </td>
         </tr>
       </tbody>
