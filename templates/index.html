@@ -1,40 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Management | Homepage </title>
-</head>
-<body>
-    
-    <h1>This is the Homepage</h1>
-    
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-    Nesciunt ratione qui veniam odit perspiciatis rerum ipsam consequuntur quos a eum!</p>
+{% extends 'base.html' %}
 
-    <h5><b><u>Shopping list</u></b></h5>
-    <ul>
-        <li>Mango</li>
-        <li>Banana</li>
-        <li>Oranges</li>
-    </ul>
+{%block title%}
+Homepage
+{%endblock%}
 
+{%block content%}
+  <h1>This is my Homepage</h1>
+{%endblock%}
 
-    <form action="">
-        <div>
-            <label for="">Username</label>
-            <input type="text">
-        </div>
-        <div>
-            <label for="">Password</label>
-            <input type="password" >
-        </div>
-        <div>
-            <button>Submit</button>
-        </div>
-    </form>
-
-    <h3>Aweosme</h3>
-
-</body>
-</html>
+{%block footer%}
+  <h4>Welcome Again</h4>
+{%endblock%}

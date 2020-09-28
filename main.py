@@ -14,4 +14,12 @@ def about():
 def contact():
     return render_template('about.html')
 
+@app.route('/inventories')
+def inventories():
+    return render_template('inventories.html')
+    
+@app.route('/charts')
+def charts():
+    return render_template('charts.html')
+
 
