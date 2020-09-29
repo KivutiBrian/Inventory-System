@@ -22,7 +22,10 @@ def inventories():
 
     # Open a cursor to perform database operations
     cur = conn.cursor()
-
+    # get all inventories
+    cur.execute('SELECT * FROM inventories')
+    records = cur.fetchall()
+    print(records)
 
     if request.method == 'POST':
         name = request.form['name']
@@ -30,6 +33,7 @@ def inventories():
         buying_price = request.form['bp']
         sp = request.form['sp']
 
+        # insert record into the database
         cur.execute('INSERT INTO inventories (name, type, bp, sp) VALUES (%s,%s,%s,%s)', (name,type,buying_price,sp))
         conn.commit()
 
