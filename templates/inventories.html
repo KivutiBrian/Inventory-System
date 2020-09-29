@@ -23,7 +23,7 @@ Inventories
           </div>
           <div class="modal-body">
 
-            <form>
+            <form action="{{ url_for('inventories') }}" method="POST">
               <!-- name -->
               <div class="form-group">
                 <label for="exampleInputEmail1">Name</label>
@@ -126,7 +126,7 @@ Inventories
             <button type="button" class="btn btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i>Add Sale</button>
             <button type="button" class="btn btn-success">View Sale</button>
             <button type="button" class="btn btn-secondary">
-              edit
+              <i class="fa fa-wrench" aria-hidden="true"></i>
             </button>
             <button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
           </td>
