@@ -11,6 +11,14 @@ app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 db = SQLAlchemy(app)
 
+from models.inventory import InventoryModel
+from models.sales import SalesModel
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
+   
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -40,8 +48,12 @@ def inventories():
         sp = request.form['sp']
 
         # insert record into the database
-        cur.execute('INSERT INTO inventories (name, type, bp, sp) VALUES (%s,%s,%s,%s)', (name,type,buying_price,sp))
-        conn.commit()
+        # cur.execute('INSERT INTO inventories (name, type, bp, sp) VALUES (%s,%s,%s,%s)', (name,type,buying_price,sp))
+        # conn.commit()
+        
+        record = InventoryModel(name=name,type=type, bp=buying_price, sp=sp)
+        db.session.add(record)
+        db.session.commit()
 
         print("record has successfully been created")
         return redirect(url_for('inventories'))
