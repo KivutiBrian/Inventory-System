@@ -13,7 +13,7 @@ class DevelopmentConfig(BaseConfig):
     """"configs for the dev env"""
     ENV="development"
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:Brian8053@@127.0.0.1:5432/septemberDB" 
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:wamzy@127.0.0.1:5432/septemberdb" 
 
 class ProductionConfig(BaseConfig):
     """configs for production"""

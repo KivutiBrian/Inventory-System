@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 # import the config class
 from settings.configs import DevelopmentConfig,ProductionConfig
 # import db connection
-from settings.db_connect import conn
+# from settings.db_connect import conn
 
 app = Flask(__name__)
 # tell flask which config settings to use
@@ -13,6 +13,7 @@ db = SQLAlchemy(app)
 
 from models.inventory import InventoryModel
 from models.sales import SalesModel
+from models.stock import StockModel
 
 @app.before_first_request
 def create_tables():
@@ -32,14 +33,10 @@ def contact():
     return render_template('about.html')
 
 @app.route('/inventories', methods=['GET', 'POST'])
-def inventories():
+def inventories():   
 
-    # Open a cursor to perform database operations
-    cur = conn.cursor()
-    # get all inventories
-    cur.execute('SELECT * FROM inventories')
-    records = cur.fetchall()
-    print(records)    
+    inventories = InventoryModel.fetch_all()
+    print(inventories) 
 
     if request.method == 'POST':
         name = request.form['name']
@@ -47,7 +44,7 @@ def inventories():
         buying_price = request.form['bp']
         sp = request.form['sp']
 
-        # insert record into the database
+        # insert record into the databases
         # cur.execute('INSERT INTO inventories (name, type, bp, sp) VALUES (%s,%s,%s,%s)', (name,type,buying_price,sp))
         # conn.commit()
         
@@ -58,10 +55,44 @@ def inventories():
         print("record has successfully been created")
         return redirect(url_for('inventories'))
 
-    return render_template('inventories.html', all_inventories=records)
+    return render_template('inventories.html', all_inventories=inventories)
     
+@app.route('/add_stock/<inv_id>', methods=['POST', 'GET'])
+def add_stock(inv_id):
+
+    if request.method == 'POST':
+        quantity = request.form['quantity']
+
+        new_stock = StockModel(inv_id=inv_id, quantity=quantity)
+        db.session.add(new_stock)
+        db.session.commit()
+
+        print("Stock added to inventory")
+        return redirect(url_for('inventories'))
+
+@app.route('/delete/<inv_id>')
+def delete_inventory(inv_id):
+    
+    record = InventoryModel.query.filter_by(id=inv_id).first()
+
+    if record:
+
+        print("Are you want to delete the record?")
+
+        db.session.delete(record)
+        db.session.commit()
+        print("Inventory deleted")
+    
+    else:
+
+        print("Error!! Operation usuccessfull")
+
+    return redirect(url_for('inventories'))
+    
+
 @app.route('/charts')
 def charts():
     return render_template('charts.html')
+
 
 

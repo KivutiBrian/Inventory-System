@@ -91,16 +91,16 @@ Inventories
 
           <tr>
             <td>{{ all_inventories.index(each)+1 }}</td>
-            <td>{{ each[1] }}</td>
-            <td>{{ each[2] }}</td>
-            <td>{{ each[3] }}</td>
-            <td>{{ each[4] }}</td>
-            <td> {{ each[5] }} </td>
+            <td>{{ each.name }}</td>
+            <td>{{ each.type }}</td>
+            <td>{{ each.bp }}</td>
+            <td>{{ each.sp }}</td>
+            <td>{{ each.stock }}</td>
             <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStock"><i class="fa fa-plus" aria-hidden="true"></i>Add Stock</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStock{{each.id}}"><i class="fa fa-plus" aria-hidden="true"></i>Add Stock</button>
 
                   <!--Stock Modal -->
-                  <div class="modal fade" id="addStock" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="addStock{{each.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -110,15 +110,15 @@ Inventories
                           </button>
                         </div>
                         <div class="modal-body">
-                          <form>
+                          <form action="{{url_for('add_stock', inv_id=inv_id)}}" method="POST">
                             <div class="form-group">
                               <label for="exampleInputEmail1">Stock</label>
-                              <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                              <input type="number" name="quantity"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             </div>
                           </form>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">Add</button>
+                          <button type="submit" class="btn btn-primary">Add</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                       </div>
@@ -131,7 +131,10 @@ Inventories
               <button type="button" class="btn btn-secondary">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
               </button>
-              <button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+              <a href="{{url_for('delete_inventory', inv_id = each.id)}}">
+                  <button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+              </a>
             </td>
           </tr>
 
